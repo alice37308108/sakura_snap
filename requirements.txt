@@ -1,0 +1,16 @@
+# Desktop Screenshot Application Dependencies
+
+# Image processing library
+Pillow>=10.0.0
+
+# Screenshot capture automation
+pyautogui>=0.9.54
+
+# Computer vision and image processing
+opencv-python>=4.8.0.76
+
+# Numerical computing
+numpy>=1.24.3
+
+# Structural Similarity Index (SSIM) for image comparison
+scikit-image>=0.21.0 
