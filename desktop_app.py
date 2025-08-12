@@ -546,6 +546,9 @@ class ScreenshotController:
         self.app.stop_button.config(state=tk.NORMAL)
         self.app.status_label.config(text="撮影中...")
         self.app.progress_var.set(0)
+        
+        # 最新のスクリーンショットリストをクリア
+        self.app.recent_listbox.delete(0, tk.END)
 
     def stop_capture(self) -> None:
         """撮影を停止"""
@@ -574,22 +577,22 @@ class ScreenshotController:
                 # 結果の処理
                 filename, similarity = self._process_capture_result(result)
 
-                if filename is None:
-                    # 重複検出
-                    duplicate_count += 1
-                    self.app.root.after(0, self.app.update_duplicate_status, similarity)
-                    time.sleep(self.screenshot_capture.interval)
-                    continue
-
-                count += 1
-
-                # 進捗更新
+                # 経過時間の計算（撮影結果に関係なく常に実行）
                 elapsed = time.time() - start_time
                 remaining = self.screenshot_capture.duration - elapsed
                 progress = (elapsed / self.screenshot_capture.duration) * 100
 
-                self.app.root.after(0, self.app.update_progress, count, int(elapsed),
-                                    int(remaining), progress, filename)
+                if filename is None:
+                    # 重複検出の場合
+                    duplicate_count += 1
+                    self.app.root.after(0, self.app.update_duplicate_status, similarity)
+                    # 重複の場合でも時間情報を更新
+                    self.app.root.after(0, self.app.update_time_info, int(elapsed), int(remaining), progress)
+                else:
+                    # 正常撮影の場合
+                    count += 1
+                    self.app.root.after(0, self.app.update_progress, count, int(elapsed),
+                                        int(remaining), progress, filename)
 
                 # 終了チェック
                 if elapsed >= self.screenshot_capture.duration:
@@ -757,6 +760,20 @@ class ScreenshotApp:
         timestamp = datetime.now().strftime('%H:%M:%S')
         self.recent_listbox.insert(0, f"{timestamp} - 重複検出 (類似度: {similarity:.1f}%)")
         self._limit_recent_list()
+
+    def update_time_info(self, elapsed: int, remaining: int, progress: float) -> None:
+        """
+        時間情報のみを更新（重複検出時用）
+        
+        Args:
+            elapsed: 経過時間
+            remaining: 残り時間
+            progress: 進捗率
+        """
+        self.elapsed_label.config(text=f"{elapsed}秒")
+        self.remaining_label.config(text=f"{remaining}秒")
+        self.progress_var.set(progress)
+        self.progress_label.config(text=f"{progress:.1f}%")
 
     def _limit_recent_list(self) -> None:
         """最新リストの項目数を制限"""
