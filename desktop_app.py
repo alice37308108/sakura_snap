@@ -24,16 +24,16 @@ class AppConfig:
     WINDOW_SIZE = "670x900"
     MIN_WINDOW_SIZE = (600, 700)
 
-    # カラーテーマ
-    PASTEL_PINK = '#FFE4E6'
-    PINK_ACCENT = '#FFB3BA'
-    PINK_HOVER = '#FF9BA7'
-    PINK_PRESSED = '#FF8C94'
-    TEXT_COLOR = '#2C2C2C'
-    WHITE = 'white'
-    GRAY = 'gray'
-    GREEN = 'green'
-    RED = 'red'
+    # カラーテーマ（ナチュラルピンク×ベージュ/ブラウン）
+    WARM_BEIGE = '#F5E6D3'      # メイン背景色 - 温かいベージュ
+    SOFT_PINK = '#E8C2CA'       # アクセント色 - 落ち着いたピンク
+    DUSTY_ROSE = '#D4A5A5'      # ホバー色 - くすんだローズ
+    MAUVE_BROWN = '#C8999B'     # プレス色 - モーヴブラウン
+    DEEP_BROWN = '#3D2E2A'      # テキスト色 - 深いブラウン
+    CREAM_WHITE = '#FEFCF8'     # 入力フィールド背景 - クリーム白
+    MUTED_GRAY = '#8B7B73'      # グレー系 - 落ち着いたグレー
+    SAGE_GREEN = '#7A8471'      # 成功色 - セージグリーン
+    RUST_RED = '#B5705C'        # エラー色 - ラストレッド
 
     # デフォルト値
     DEFAULT_SAVE_PATH = "./screenshots"
@@ -64,7 +64,7 @@ class AppStyleManager:
     def setup_style(self) -> None:
         """アプリケーション全体のスタイルを設定"""
         self.style.theme_use('classic')
-        self.root.configure(bg=AppConfig.PASTEL_PINK)
+        self.root.configure(bg=AppConfig.WARM_BEIGE)
 
         self._configure_basic_styles()
         self._configure_button_styles()
@@ -74,50 +74,50 @@ class AppStyleManager:
         """基本的なウィジェットのスタイルを設定"""
         basic_styles = {
             'TFrame': {
-                'background': AppConfig.PASTEL_PINK,
+                'background': AppConfig.WARM_BEIGE,
                 'relief': 'flat',
                 'borderwidth': 0
             },
             'TLabelFrame': {
-                'background': AppConfig.PASTEL_PINK,
-                'foreground': AppConfig.TEXT_COLOR,
+                'background': AppConfig.WARM_BEIGE,
+                'foreground': AppConfig.DEEP_BROWN,
                 'relief': 'flat',
                 'borderwidth': 1
             },
             'TLabelFrame.Label': {
-                'background': AppConfig.PASTEL_PINK,
-                'foreground': AppConfig.TEXT_COLOR
+                'background': AppConfig.WARM_BEIGE,
+                'foreground': AppConfig.DEEP_BROWN
             },
             'TLabel': {
-                'background': AppConfig.PASTEL_PINK,
-                'foreground': AppConfig.TEXT_COLOR
+                'background': AppConfig.WARM_BEIGE,
+                'foreground': AppConfig.DEEP_BROWN
             },
             'TEntry': {
-                'background': AppConfig.WHITE,
-                'foreground': AppConfig.TEXT_COLOR,
-                'fieldbackground': AppConfig.WHITE,
+                'background': AppConfig.CREAM_WHITE,
+                'foreground': AppConfig.DEEP_BROWN,
+                'fieldbackground': AppConfig.CREAM_WHITE,
                 'borderwidth': 1
             },
             'TCombobox': {
-                'background': AppConfig.WHITE,
-                'foreground': AppConfig.TEXT_COLOR,
-                'fieldbackground': AppConfig.WHITE,
+                'background': AppConfig.CREAM_WHITE,
+                'foreground': AppConfig.DEEP_BROWN,
+                'fieldbackground': AppConfig.CREAM_WHITE,
                 'borderwidth': 1
             },
             'TSpinbox': {
-                'background': AppConfig.WHITE,
-                'foreground': AppConfig.TEXT_COLOR,
-                'fieldbackground': AppConfig.WHITE,
+                'background': AppConfig.CREAM_WHITE,
+                'foreground': AppConfig.DEEP_BROWN,
+                'fieldbackground': AppConfig.CREAM_WHITE,
                 'borderwidth': 1
             },
             'TProgressbar': {
-                'background': AppConfig.PINK_ACCENT,
-                'troughcolor': AppConfig.PASTEL_PINK,
+                'background': AppConfig.SOFT_PINK,
+                'troughcolor': AppConfig.WARM_BEIGE,
                 'borderwidth': 0
             },
             'TScrollbar': {
-                'background': AppConfig.PINK_ACCENT,
-                'troughcolor': AppConfig.PASTEL_PINK,
+                'background': AppConfig.SOFT_PINK,
+                'troughcolor': AppConfig.WARM_BEIGE,
                 'borderwidth': 0
             }
         }
@@ -128,21 +128,21 @@ class AppStyleManager:
     def _configure_button_styles(self) -> None:
         """ボタンスタイルの設定"""
         self.style.configure('TButton',
-                             background=AppConfig.PINK_ACCENT,
-                             foreground=AppConfig.TEXT_COLOR,
+                             background=AppConfig.SOFT_PINK,
+                             foreground=AppConfig.DEEP_BROWN,
                              relief='raised',
                              borderwidth=1)
 
         # ボタンの状態別スタイル
         state_maps = {
-            'TFrame': [('active', AppConfig.PASTEL_PINK), ('!active', AppConfig.PASTEL_PINK)],
-            'TLabelFrame': [('active', AppConfig.PASTEL_PINK), ('!active', AppConfig.PASTEL_PINK)],
-            'TLabelFrame.Label': [('active', AppConfig.PASTEL_PINK), ('!active', AppConfig.PASTEL_PINK)],
-            'TLabel': [('active', AppConfig.PASTEL_PINK), ('!active', AppConfig.PASTEL_PINK)],
+            'TFrame': [('active', AppConfig.WARM_BEIGE), ('!active', AppConfig.WARM_BEIGE)],
+            'TLabelFrame': [('active', AppConfig.WARM_BEIGE), ('!active', AppConfig.WARM_BEIGE)],
+            'TLabelFrame.Label': [('active', AppConfig.WARM_BEIGE), ('!active', AppConfig.WARM_BEIGE)],
+            'TLabel': [('active', AppConfig.WARM_BEIGE), ('!active', AppConfig.WARM_BEIGE)],
             'TButton': [
-                ('active', AppConfig.PINK_HOVER),
-                ('pressed', AppConfig.PINK_PRESSED),
-                ('!active', AppConfig.PINK_ACCENT)
+                ('active', AppConfig.DUSTY_ROSE),
+                ('pressed', AppConfig.MAUVE_BROWN),
+                ('!active', AppConfig.SOFT_PINK)
             ]
         }
 
@@ -154,18 +154,18 @@ class AppStyleManager:
         custom_styles = {
             'Header.TLabel': {
                 'font': ('Arial', 16, 'bold'),
-                'background': AppConfig.PASTEL_PINK,
-                'foreground': AppConfig.TEXT_COLOR
+                'background': AppConfig.WARM_BEIGE,
+                'foreground': AppConfig.DEEP_BROWN
             },
             'Section.TLabel': {
                 'font': ('Arial', 12, 'bold'),
-                'background': AppConfig.PASTEL_PINK,
-                'foreground': AppConfig.TEXT_COLOR
+                'background': AppConfig.WARM_BEIGE,
+                'foreground': AppConfig.DEEP_BROWN
             },
             'Status.TLabel': {
                 'font': ('Arial', 10),
-                'background': AppConfig.PASTEL_PINK,
-                'foreground': AppConfig.TEXT_COLOR
+                'background': AppConfig.WARM_BEIGE,
+                'foreground': AppConfig.DEEP_BROWN
             }
         }
 
@@ -194,7 +194,7 @@ class GUIBuilder:
         Returns:
             メインフレーム
         """
-        canvas = tk.Canvas(self.parent, bg=AppConfig.PASTEL_PINK, highlightthickness=0)
+        canvas = tk.Canvas(self.parent, bg=AppConfig.WARM_BEIGE, highlightthickness=0)
         scrollbar = ttk.Scrollbar(self.parent, orient="vertical", command=canvas.yview)
         scrollable_frame = ttk.Frame(canvas)
 
@@ -257,8 +257,8 @@ class GUIBuilder:
             parent: 親フレーム
         """
         settings_frame = tk.LabelFrame(parent, text="🛒 設定",
-                                       bg=AppConfig.PASTEL_PINK,
-                                       fg=AppConfig.TEXT_COLOR,
+                                       bg=AppConfig.WARM_BEIGE,
+                                       fg=AppConfig.DEEP_BROWN,
                                        font=('Arial', 10),
                                        bd=1, relief='solid')
         settings_frame.configure(padx=AppConfig.SECTION_PADDING,
@@ -293,7 +293,7 @@ class GUIBuilder:
         folder_frame.columnconfigure(0, weight=1)
 
         # フォルダステータス
-        self.app.folder_status_label = ttk.Label(parent, text="", foreground=AppConfig.GREEN)
+        self.app.folder_status_label = ttk.Label(parent, text="", foreground=AppConfig.SAGE_GREEN)
         self.app.folder_status_label.grid(row=row + 2, column=0, columnspan=3, sticky=tk.W, pady=3)
 
     def _create_timing_settings(self, parent: tk.LabelFrame) -> None:
@@ -340,7 +340,7 @@ class GUIBuilder:
         similarity_spin.grid(row=row, column=1, sticky=tk.W, pady=3)
 
         ttk.Label(parent, text="この値以上に類似した画像は自動削除されます",
-                  font=('Arial', 8), foreground=AppConfig.GRAY).grid(
+                  font=('Arial', 8), foreground=AppConfig.MUTED_GRAY).grid(
             row=row + 1, column=0, columnspan=3, sticky=tk.W, pady=2)
 
     def create_control_section(self, parent: ttk.Frame) -> None:
@@ -351,8 +351,8 @@ class GUIBuilder:
             parent: 親フレーム
         """
         control_frame = tk.LabelFrame(parent, text="🎮 実行コントロール",
-                                      bg=AppConfig.PASTEL_PINK,
-                                      fg=AppConfig.TEXT_COLOR,
+                                      bg=AppConfig.WARM_BEIGE,
+                                      fg=AppConfig.DEEP_BROWN,
                                       font=('Arial', 10),
                                       bd=1, relief='solid')
         control_frame.configure(padx=AppConfig.SECTION_PADDING,
@@ -381,8 +381,8 @@ class GUIBuilder:
             parent: 親フレーム
         """
         status_frame = tk.LabelFrame(parent, text="📊 撮影状況",
-                                     bg=AppConfig.PASTEL_PINK,
-                                     fg=AppConfig.TEXT_COLOR,
+                                     bg=AppConfig.WARM_BEIGE,
+                                     fg=AppConfig.DEEP_BROWN,
                                      font=('Arial', 10),
                                      bd=1, relief='solid')
         status_frame.configure(padx=AppConfig.SECTION_PADDING,
@@ -435,8 +435,8 @@ class GUIBuilder:
     def _create_recent_captures(self, parent: tk.LabelFrame) -> None:
         """最新キャプチャ表示UIを作成"""
         recent_frame = tk.LabelFrame(parent, text="📷 最新のスクリーンショット",
-                                     bg=AppConfig.PASTEL_PINK,
-                                     fg=AppConfig.TEXT_COLOR,
+                                     bg=AppConfig.WARM_BEIGE,
+                                     fg=AppConfig.DEEP_BROWN,
                                      font=('Arial', 9),
                                      bd=1, relief='solid')
         recent_frame.configure(padx=5, pady=5)
@@ -444,9 +444,9 @@ class GUIBuilder:
                           sticky=(tk.W, tk.E, tk.N, tk.S), pady=(10, 0))
 
         self.app.recent_listbox = tk.Listbox(recent_frame, height=6,
-                                             bg=AppConfig.WHITE,
-                                             fg=AppConfig.TEXT_COLOR,
-                                             selectbackground=AppConfig.PINK_ACCENT)
+                                             bg=AppConfig.CREAM_WHITE,
+                                             fg=AppConfig.DEEP_BROWN,
+                                             selectbackground=AppConfig.SOFT_PINK)
         self.app.recent_listbox.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
         recent_scrollbar = ttk.Scrollbar(recent_frame, orient=tk.VERTICAL,
@@ -686,28 +686,28 @@ class ScreenshotApp:
 
         if not folder_path:
             self.folder_status_label.config(text="フォルダパスが入力されていません",
-                                            foreground=AppConfig.RED)
+                                            foreground=AppConfig.RUST_RED)
             return False
 
         if os.path.exists(folder_path):
             if os.path.isdir(folder_path):
                 self.folder_status_label.config(text="✅ フォルダが見つかりました",
-                                                foreground=AppConfig.GREEN)
+                                                foreground=AppConfig.SAGE_GREEN)
                 return True
             else:
                 self.folder_status_label.config(text="指定されたパスはフォルダではありません",
-                                                foreground=AppConfig.RED)
+                                                foreground=AppConfig.RUST_RED)
                 return False
         else:
             try:
                 os.makedirs(folder_path, exist_ok=True)
                 self.folder_status_label.config(text="✅ フォルダを作成しました",
-                                                foreground=AppConfig.GREEN)
+                                                foreground=AppConfig.SAGE_GREEN)
                 return True
             except Exception as e:
                 self.folder_status_label.config(
                     text=f"フォルダの作成に失敗しました: {str(e)}",
-                    foreground=AppConfig.RED)
+                    foreground=AppConfig.RUST_RED)
                 return False
 
     def select_region(self) -> None:
