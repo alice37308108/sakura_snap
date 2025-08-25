@@ -720,7 +720,37 @@ class ScreenshotApp:
 
     def start_capture(self) -> None:
         """撮影を開始"""
+        # プライバシー警告の表示
+        if not self._show_privacy_warning():
+            return
         self.controller.start_capture()
+        
+    def _show_privacy_warning(self) -> bool:
+        """プライバシー警告を表示"""
+        warning_text = """⚠️ プライバシーとセキュリティに関する重要な警告 ⚠️
+
+このアプリケーションは画面の内容を撮影・保存します。
+以下の点にご注意ください：
+
+🔴 撮影禁止対象:
+• 個人情報（氏名、住所、電話番号等）
+• 金融情報（口座番号、クレジットカード等）
+• 企業の機密情報・顧客データ
+• ログイン情報・パスワード画面
+• 他人のプライベートな情報
+
+⚖️ 法的注意事項:
+• 各国の法律・規制を遵守してください
+• 企業での使用は事前に許可を得てください
+• 撮影による損害について開発者は責任を負いません
+
+🛡️ セキュリティ注意:
+• 画像は暗号化されずに保存されます
+• 定期的に不要なファイルを削除してください
+
+上記を理解し、責任を持って使用しますか？"""
+        
+        return messagebox.askyesno("プライバシー警告", warning_text)
 
     def stop_capture(self) -> None:
         """撮影を停止"""

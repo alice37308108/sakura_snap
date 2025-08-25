@@ -502,6 +502,6 @@ class RegionSelector:
             messagebox.showwarning("警告", "範囲を選択してください")
 
 
-# pyautoguiのフェイルセーフを無効化（本番環境では注意）
-# マウスを画面の角に移動させてもプログラムが停止しないようにする
-pyautogui.FAILSAFE = False
+# pyautoguiのフェイルセーフを有効のまま維持（安全性のため）
+# マウスを画面の左上角(0,0)に移動すると緊急停止可能
+# pyautogui.FAILSAFE = False  # セキュリティ上の理由で無効化を削除
